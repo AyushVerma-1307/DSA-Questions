@@ -9,9 +9,24 @@
  * };
  */
 class Solution {
+     ListNode* reverse1(ListNode* head){
+         //base case
+         if(head == NULL || head->next == NULL){
+            return head;
+         }
+         
+         ListNode* chotaHead = reverse1(head -> next);
+         
+         head -> next -> next = head;
+         head -> next = NULL;
+         
+         return chotaHead;
+         
+     }
+
 private:
     void reverse(ListNode* &head,ListNode* curr,ListNode* prev){
-        //basecase
+        //base case
         if(curr == NULL){
             head = prev;
             return;
@@ -23,11 +38,15 @@ private:
     
 public:
     ListNode* reverseList(ListNode* head) {
+        
+        return reverse1(head);
+        /*
         ListNode* prev = NULL;
         ListNode* curr = head;
         
         reverse(head,curr,prev);
         return head;
+        */
         /*
         if(head == NULL || head->next == NULL){
         return head;
