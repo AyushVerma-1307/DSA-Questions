@@ -11,7 +11,7 @@
 2 contains 1 digit (odd number of digits).&nbsp;
 6 contains 1 digit (odd number of digits).&nbsp;
 7896 contains 4 digits (even number of digits).&nbsp;
-Therefore only 12 and 7896 contain an even number of digits.
+Therefore only 12 and 7896 contain an even number of digits
 </pre>
 
 <p><strong class="example">Example 2:</strong></p>
