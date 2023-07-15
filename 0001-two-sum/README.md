@@ -15,7 +15,7 @@
 <p><strong class="example">Example 2:</strong></p>
 
 <pre><strong>Input:</strong> nums = [3,2,4], target = 6
-<strong>Output:</strong> [1,2]
+<strong>Output</strong> [1,2]
 </pre>
 
 <p><strong class="example">Example 3:</strong></p>
