@@ -13,9 +13,6 @@ public:
                 s++;
             }
         }
-        if(nums.size()==1){
-            return nums.size();
-        }
         return nums.size();
     }
 };
