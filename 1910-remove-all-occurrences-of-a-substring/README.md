@@ -36,8 +36,8 @@ Now s has no occurrences of "xy".
 <p><strong>Constraints:</strong></p>
 
 <ul>
-	<li><code>1 &lt;= s.length &lt;= 1000</code></li>
-	<li><code>1 &lt;= part.length &lt;= 1000</code></li>
+	<li><merlin-component id="merlin-code-summarizer" class="merlin-code-summarizer"></merlin-component><code>1 &lt;= s.length &lt;= 1000</code></li>
+	<li><merlin-component id="merlin-code-summarizer" class="merlin-code-summarizer"></merlin-component><code>1 &lt;= part.length &lt;= 1000</code></li>
 	<li><code>s</code>​​​​​​ and <code>part</code> consists of lowercase English letters.</li>
 </ul>
 </div>
