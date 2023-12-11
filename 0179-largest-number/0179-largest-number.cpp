@@ -17,5 +17,7 @@ public:
             ans+=i;
         }
         return ans;
+        // TC-O(N)
+        // SC-O(N)
     }
 };
