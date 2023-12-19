@@ -8,7 +8,7 @@
 <strong>Explanation:</strong> "aba" is also a valid answer.
 </pre>
 
-<p><strong class="example">Example 2:</strong></p>
+<p><strong class="example">Example 2</strong></p>
 
 <pre><strong>Input:</strong> s = "cbbd"
 <strong>Output:</strong> "bb"
