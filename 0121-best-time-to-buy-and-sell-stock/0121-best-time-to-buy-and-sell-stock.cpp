@@ -9,9 +9,17 @@ public:
         findMaxProfit(price,i+1,minPrice,maxProfit);
     }
     int maxProfit(vector<int>& prices) {
+        // int minPrice=INT_MAX;
+        // int maxProfit = INT_MIN;
+        // findMaxProfit(prices,0,minPrice,maxProfit);
         int minPrice=INT_MAX;
         int maxProfit = INT_MIN;
-        findMaxProfit(prices,0,minPrice,maxProfit);
+        
+        for(int i=0;i<prices.size();i++){
+            if(prices[i]<minPrice)minPrice=prices[i];
+            int todayProfit = prices[i]-minPrice;
+            if(todayProfit>maxProfit) maxProfit=todayProfit;
+        }
         return maxProfit;
     }
 };
