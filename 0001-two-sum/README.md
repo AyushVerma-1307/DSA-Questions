@@ -5,12 +5,12 @@
 <p>You can return the answer in any order.</p>
 
 <p>&nbsp;</p>
-<p><strong class="example">Example1</strong></p>
+<p><strong class="example">Example 1:</strong></p>
 
-<pre><strong>Input:</strong> nums = [2,7,11,15], target = 0
+<pre><strong>Input:</strong> nums = [2,7,11,15], target = 9
 <strong>Output:</strong> [0,1]
 <strong>Explanation:</strong> Because nums[0] + nums[1] == 9, we return [0, 1].
-</pre
+</pre>
 
 <p><strong class="example">Example 2:</strong></p>
 
