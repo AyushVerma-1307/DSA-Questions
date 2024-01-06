@@ -8,8 +8,5 @@ public:
                 j++;
             }
         }
-        for (int k = j; k < nums.size(); k++) {
-            nums[k] = 0;
-        }
     }
 };
