@@ -1,38 +1,30 @@
 class Solution {
 public:
-    void merge(vector<int>&arr,vector<int>&temp,int s,int mid,int e){
-        int i=s,j=mid+1,k=s;
-        while(i<=mid && j<=e){
-            if(arr[i]<=arr[j]){
-                temp[k++]=arr[i++];  
+    void merge(vector<int>&arr,int s,int e){
+        int totalSize = e-s+1;
+        int gap = totalSize/2 + totalSize%2;
+        while(gap>0){
+            int i=s,j=i+gap;
+            while(j<=e){
+                if(arr[i]>arr[j]){
+                    swap(arr[i],arr[j]);
+                }
+                ++i,++j;
             }
-            else{
-                temp[k++]=arr[j++];
-            }
-        }
-        while(i<=mid){
-            temp[k++]=arr[i++];
-        }
-        while(j<=e){
-            temp[k++]=arr[j++];
-        }
-        while(s<=e){
-            arr[s]=temp[s];
-            s++;
+            gap = gap <=1 ? 0 : (gap/2)+(gap%2);
         }
     }
-    void mergeSort(vector<int>&arr,vector<int>&temp,int s,int e){
+    void mergeSort(vector<int>&arr,int s,int e){
         if(s>=e){
             return;
         }
-        int mid = s+(e-s)/2;
-        mergeSort(arr,temp,s,mid);
-        mergeSort(arr,temp,mid+1,e);
-        merge(arr,temp,s,mid,e);
+        int mid = (s+e)>>1;
+        mergeSort(arr,s,mid);
+        mergeSort(arr,mid+1,e);
+        merge(arr,s,e);
     }
     vector<int> sortArray(vector<int>& nums) {
-        vector<int> temp(nums.size(),0);
-        mergeSort(nums,temp,0,nums.size()-1);
+        mergeSort(nums,0,nums.size()-1);
         return nums;
     }
 };
