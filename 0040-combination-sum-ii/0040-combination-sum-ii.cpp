@@ -5,6 +5,9 @@ private:
             ans.push_back(output);
             return;
         }
+        if(target<0 || index>=arr.size()){
+            return;
+        }
         for (int i = index; i < arr.size(); i++) {
             if (i > index && arr[i] == arr[i - 1]) continue;
             if (arr[i] > target) break;
