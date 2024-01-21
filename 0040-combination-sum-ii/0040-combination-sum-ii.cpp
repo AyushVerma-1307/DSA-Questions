@@ -10,7 +10,6 @@ private:
         }
         for (int i = index; i < arr.size(); i++) {
             if (i > index && arr[i] == arr[i - 1]) continue;
-            if (arr[i] > target) break;
             output.push_back(arr[i]);
             solve(arr,target - arr[i], ans, output,i + 1);
             output.pop_back();
