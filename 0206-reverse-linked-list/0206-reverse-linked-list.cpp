@@ -9,58 +9,20 @@
  * };
  */
 class Solution {
-     ListNode* reverse1(ListNode* head){
-         //base case
-         if(head == NULL || head->next == NULL){
-            return head;
-         }
-         
-         ListNode* chotaHead = reverse1(head -> next);
-         
-         head -> next -> next = head;
-         head -> next = NULL;
-         
-         return chotaHead;
-         
-     }
-
-private:
-    void reverse(ListNode* &head,ListNode* curr,ListNode* prev){
-        //base case
+public:
+    void solve(ListNode* &head,ListNode* &prev,ListNode* &curr){
         if(curr == NULL){
             head = prev;
-            return;
+            return ;
         }
         ListNode* forward = curr -> next;
-        reverse(head , forward ,curr);
-        curr -> next = prev;
+        curr -> next =prev;
+        solve(head,curr, forward);
     }
-    
-public:
     ListNode* reverseList(ListNode* head) {
-        
-        return reverse1(head);
-        /*
         ListNode* prev = NULL;
         ListNode* curr = head;
-        
-        reverse(head,curr,prev);
+        solve(head,prev,curr);
         return head;
-        */
-        /*
-        if(head == NULL || head->next == NULL){
-        return head;
-        }
-        ListNode* prev = NULL;
-        ListNode* curr = head;
-        ListNode* forward = NULL;
-        while(curr!=NULL){
-            forward = curr -> next;
-            curr -> next = prev;
-            prev = curr;
-            curr = forward;
-        }
-        return prev;
-        */
     }
 };
