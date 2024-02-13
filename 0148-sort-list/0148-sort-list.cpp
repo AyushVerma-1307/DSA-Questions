@@ -10,28 +10,64 @@
  */
 class Solution {
 public:
-    ListNode* sortList(ListNode* head) {
-        if(head==NULL){
-            return NULL;
+    ListNode* findMid(ListNode* head){
+        if (head == NULL || head->next == NULL) {
+            return head;
         }
-        vector<int>answer;
+        ListNode* slow = head;
+        ListNode* fast = head->next;
 
-        ListNode *temp = head;
-        while(temp!=NULL){
-            answer.push_back(temp->val);
-            temp=temp->next;
+        while (fast != NULL && fast->next != NULL) {
+            fast = fast->next->next; // Move fast by two steps
+            slow = slow->next;       // Move slow by one step
         }
-
-        sort(answer.begin(),answer.end());
+        return slow;
+    }
+    ListNode* merge(ListNode* &left, ListNode* &right){
+        if(left == NULL) return right;
+        if(right == NULL) return left;
         
-        int i=0;
-        temp = head;
-        while(temp!=NULL){
-            temp->val = answer[i];  // change values in linked list
-            i++;
-            temp = temp->next;
+        ListNode* ansHead = new ListNode(-1);
+        ListNode* ansTail = ansHead;
+        while(left != NULL && right != NULL){
+            if(left -> val <= right -> val){
+                ansTail -> next = left;
+                ansTail = left;
+                left = left -> next;
+            }
+            else{
+                ansTail -> next = right;
+                ansTail = right;
+                right = right -> next;
+            }
+            
         }
-
-        return head;
+        
+        if(left){
+            ansTail -> next = left;
+        }
+        if(right){
+            ansTail -> next = right;
+        }
+        return ansHead->next;
+    }
+    ListNode* sortList(ListNode* head) {
+        if(head==NULL || head -> next == NULL){
+            return head;
+        }
+        
+        ListNode* mid = findMid(head);
+        ListNode* left = head;
+        ListNode* right = mid -> next;
+        
+        mid -> next = NULL;
+        
+        left = sortList(left);
+        right = sortList(right);
+        
+        ListNode* mergedList = merge(left,right);
+        
+        return mergedList;
+        
     }
 };
