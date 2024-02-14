@@ -19,7 +19,7 @@ public:
     Node* copyRandomList(Node* head) {
         if(!head)return head;
         
-        //clone the LL
+        //step 1: clone the LL
         Node* temp = head;
         while(temp){
             Node* newNode = new Node(temp->val);
@@ -28,7 +28,7 @@ public:
             temp = temp -> next -> next;
         }
         
-        //Assign random links of newnode A' with help of old node A
+        //step 2: Assign random links of newnode A' with help of old node A
         temp = head;
         while(temp){
             Node* newNode = temp ->next;
