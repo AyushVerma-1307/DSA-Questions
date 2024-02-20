@@ -20,34 +20,35 @@ int main()
 int countRev (string s)
 {
     // your code here
-    if(s.length() % 2 != 0){
+    if(s.size() & 1 ){
         return -1;
     }
-    
-    int i = 0;
     stack<char> st;
-    int count = 0;
-    while(i<s.length()){
-        
-        if(s[i] == '{'){
-            st.push(s[i]);
-            i++;
+    
+    for(auto ch : s){
+        if(ch == '{'){
+            st.push(ch);
         }
         else{
-            if(!st.empty() && st.top() == '{'){
+            if(!st.empty() && st.top()=='{' ){
                 st.pop();
-                i++;
             }
             else{
-                s[i] = '{';
-                count++;
+                st.push(ch);
             }
         }
     }
-    if(st.size() % 2 != 0){
-        return -1;
+    int count=0;
+    while(!st.empty()){
+        char temp1 = st.top(); st.pop();
+        char temp2 = st.top(); st.pop();
+        
+        if(temp1 == temp2){
+            count+=1;
+        }
+        else{
+            count+=2;
+        }
     }
-    else{
-        return count + (st.size()/2);
-    }
+    return count;
 }
