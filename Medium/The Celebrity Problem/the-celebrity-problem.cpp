@@ -8,76 +8,49 @@ using namespace std;
 //User function template for C++
 
 class Solution 
-{   
-    private:
-    
-    bool knows(vector<vector<int> >& M,int a,int b, int n){
-        if(M[a][b] == 1){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
+{
     public:
     //Function to find if there is a celebrity in the party or not.
     int celebrity(vector<vector<int> >& M, int n) 
     {
         // code here 
-        stack<int> s;
-        
+        stack<int> st;
         for(int i=0;i<n;i++){
-            s.push(i);
+            st.push(i);
         }
         
-        // step 2 : get 2 elements and compare
-        while(s.size() > 1){
-            int a = s.top();
-            s.pop();
+        while(st.size() != 1){
+            int a = st.top(); st.pop();
+            int b = st.top(); st.pop();
             
-            int b= s.top();
-            s.pop();
-            
-            if(knows(M,a,b,n)){
-                s.push(b);
+            if(M[a][b]){
+                // a is not celebrity , discard a and push b
+                st.push(b);
             }
             else{
-                s.push(a);
+                // b is not celebrity, discard b and push a
+                st.push(a);
             }
         }
-        int candidate = s.top();
-        // single element in stack is potential entity
-        // verify it
         
-        bool rowCheck = false;
-        int zeroCount = 0;
-        for(int i=0; i<n ; i++){
-            if(M[candidate][i] == 0){
-                zeroCount++;
+        int mightCelebrity = st.top(); st.pop();
+        
+        //check the row of this element all 0's
+        for(int i=0;i<n;i++){
+            if(M[mightCelebrity][i] != 0){
+                return -1;
             }
         }
-        if(zeroCount == n){
-            rowCheck = true;
-        }
         
-        bool colCheck = false;
-        int oneCount = 0;
-        for(int i=0; i<n ; i++){
-            if(M[i][candidate] == 1){
-                oneCount++;
+        //check the column of this element all 1's
+        for(int i=0;i<n;i++){
+            if(M[i][mightCelebrity] != 1 && i != mightCelebrity){
+                return -1;
             }
         }
-        if(oneCount == n-1){
-            colCheck = true;
-        }
         
-        if(rowCheck == true && colCheck ==true){
-            return candidate;
-        }
-        else{
-            return -1;
-        }
-        
+        // means it is clebrity
+        return mightCelebrity;
     }
 };
 
