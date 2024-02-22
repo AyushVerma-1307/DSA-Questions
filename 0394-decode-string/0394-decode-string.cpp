@@ -5,11 +5,12 @@ public:
         for(auto ch:s){
             if(ch == ']'){
                 string stringToRepeat = "";
-                while(!st.empty() && !isdigit(st.top()[0])){
+                while(!st.empty() && st.top() != "["){
                     string top = st.top();
-                    stringToRepeat += top == "[" ? "":top;
+                    stringToRepeat += top;
                     st.pop();
                 }
+                st.pop();
                 string numericTime = "";
                 while(!st.empty() && isdigit(st.top()[0])){
                     numericTime += st.top();
