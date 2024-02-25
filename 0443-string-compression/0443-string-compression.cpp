@@ -1,36 +1,33 @@
 class Solution {
 public:
     int compress(vector<char>& s) {
-        int index=0;
-        int prev=s[0];
-        int count=1;
+        if(s.size()==1) return 1;
+        int index = 0; //to keep track of new compressed char
+        int prev = s[0];
+        int count =1;
         
         for(int i=1;i<s.size();i++){
-            if(s[i]==prev){
+            if(s[i] == prev){
                 count++;
             }
             else{
-                s[index++]=prev;
+                s[index++] = prev;
                 if(count>1){
-                    int start = index;
-                    while(count>0){
-                        s[index++]=(count%10)+'0';
-                        count /= 10; 
+                    string compressedCount = to_string(count);
+                    for(char ch:compressedCount){
+                        s[index++] = ch;
                     }
-                    reverse(s.begin()+start,s.begin()+index);
                 }
-                prev=s[i];
-                count=1;
+                prev = s[i];
+                count = 1;
             }
         }
-        s[index++] = prev;
+        s[index++]=prev;
         if(count>1){
-            int start = index;
-            while(count>0){
-                s[index++]=(count%10)+'0';
-                count /= 10; 
+            string compressedCount = to_string(count);
+            for(char ch:compressedCount){
+                s[index++] = ch;
             }
-            reverse(s.begin()+start,s.begin()+index);
         }
         return index;
     }
