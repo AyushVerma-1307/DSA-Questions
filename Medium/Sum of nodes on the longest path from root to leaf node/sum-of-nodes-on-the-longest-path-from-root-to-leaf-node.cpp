@@ -117,37 +117,48 @@ struct Node
 class Solution
 {
 public:
-    void findLongestPath(Node* root, int len, int sum, int& maxLen, int& maxSum) {
-        if (root == NULL) {
-            if (len > maxLen) {
-                maxLen = len;
-                maxSum = sum;
-            } else if (len == maxLen && sum > maxSum) {
-                maxSum = sum;
-            }
+    void solve(Node *root, vector<pair<int, int>> &temp, int &sum, int len) {
+        if (root == NULL) return;
+        if (root->left == NULL && root->right == NULL) {
+            sum += root->data;
+            temp.push_back(make_pair(sum, len));
+            sum -= root->data;
             return;
         }
-        
-        // Include the current node in the path
+    
         sum += root->data;
-        len++;
-        
-        // Traverse left and right subtrees
-        findLongestPath(root->left, len, sum, maxLen, maxSum);
-        findLongestPath(root->right, len, sum, maxLen, maxSum);
+    
+        solve(root->left, temp, sum, len + 1);
+        solve(root->right, temp, sum, len + 1);
+    
+        sum -= root->data;
     }
     
     int sumOfLongRootToLeafPath(Node *root) {
-        if (root == NULL) return 0;
-        
-        int maxLen = 0, maxSum = 0;
-        findLongestPath(root, 0, 0, maxLen, maxSum);
-        
+        vector<pair<int, int>> temp;
+        int sum = 0;
+        solve(root, temp, sum, 1);
+    
+        int maxSum = INT_MIN;
+        int maxLen = INT_MIN;
+        for (int i = 0; i < temp.size(); i++) {
+            int a = temp[i].first;
+            int b = temp[i].second;
+            
+            if (b > maxLen) {
+                maxLen = b;
+                maxSum = a;
+            }
+            else if (maxLen == b && maxSum <= a) {
+                maxSum = a;
+            }
+        }
         return maxSum;
+    
     }
 
-
 };
+
 
 //{ Driver Code Starts.
 
