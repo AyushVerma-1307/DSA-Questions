@@ -113,38 +113,36 @@ struct Node
 };
 */
 // your task is to complete this function
-bool find(Node* root, int &k, int node, int &data)
-{
-    if(root == NULL) 
-        return false;
-    
-    if(root->data == node) 
+bool find(Node* root, int &k, int node, vector<int>& temp) {
+    if (root == NULL) return false;
+
+    if (root->data == node) {
+        temp.push_back(root->data); // Correctly adding to a vector
         return true;
-    
-    bool leftAns = find(root->left, k, node, data);
-    bool rightAns = find(root->right, k, node, data);
-    
-    if(leftAns || rightAns)
-    {
-        k--;
-        if(k == 0)
-        {   
-            data = root->data;
-            return true;
-        }
     }
-    
+
+    temp.push_back(root->data); // Correctly adding to a vector
+    bool leftAns = find(root->left, k, node, temp);
+    bool rightAns = find(root->right, k, node, temp);
+
+    if (!leftAns && !rightAns) {
+        temp.pop_back(); // Correctly removing the last element from a vector
+    }
+
     return leftAns || rightAns;
 }
 
-int kthAncestor(Node *root, int k, int node)
-{
-    int data = -1; // Initialize data to -1
-    bool ans = find(root, k, node, data);
-    
-    if(ans == false)
+int kthAncestor(Node *root, int k, int node) {
+    vector<int> temp; // Declare temp as a vector<int>
+    bool ans = find(root, k, node, temp);
+
+    if (!ans || temp.size() < k + 1) { // Check if k ancestors are available
         return -1;
-    else
-        return data;
+    }
+
+    // Adjusting the index for kth ancestor considering 0-based indexing
+    // and that temp includes the node itself.
+    return temp[temp.size() - k - 1];
 }
+
 
